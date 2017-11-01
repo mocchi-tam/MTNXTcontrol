@@ -20,7 +20,7 @@ class NXTControl():
         b = nxtl.find_one_brick(debug=True,strict=True,
                                 method=nxtl.Method(usb=True, bluetooth=False))
         
-        start = time()
+        start = time.time()
         time_bomb = random.randint(25,35)
         
         if b:
