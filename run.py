@@ -27,9 +27,9 @@ class NXTControl():
             while(True):
                 elapsed_time = time.time() - start
                 if elapsed_time < time_bomb:
-                    flag = True
-                else:
                     flag = False
+                else:
+                    flag = True
                     start = time.time()
                     time_bomb = random.randint(25,35)
                     
