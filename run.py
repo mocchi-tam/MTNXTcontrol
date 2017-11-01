@@ -1,22 +1,42 @@
+# -*- coding: utf-8 -*-
+import time
+import random
 import nxt.locator as nxtl
 import nxt.motor as nxtm
-import random
 
-def spin_around(b, flag):
-    m_right = nxtm.Motor(b, nxtm.PORT_C)
-    if flag:
-        m_right.turn(10, 360)
-    else:
-        m_right.turn(-127, 720)
-        
-b = nxtl.find_one_brick(debug=True,strict=True,method=nxtl.Method(usb=True, bluetooth=False))
-if b:
-    for i in range(30):
-        var = random.randint(1,5)
-        if var == 1:
-            flag = True
+def main():
+    nc = NXTControl()
+    nc.do()
+
+class NXTControl():
+    def spin_around(self, b, flag):
+        m_right = nxtm.Motor(b, nxtm.PORT_C)
+        if flag:
+            m_right.turn(10, 360)
         else:
-            flag = False
-        spin_around(b, flag)
-else:
-    print('No NXT bricks found')
+            m_right.turn(-127, 720)
+    
+    def do(self):
+        b = nxtl.find_one_brick(debug=True,strict=True,
+                                method=nxtl.Method(usb=True, bluetooth=False))
+        
+        start = time()
+        time_bomb = random.randint(25,35)
+        
+        if b:
+            while(True):
+                elapsed_time = time.time() - start
+                if elapsed_time < time_bomb:
+                    flag = True
+                else:
+                    flag = False
+                    start = time.time()
+                    time_bomb = random.randint(25,35)
+                    
+                # execute the action
+                self.spin_around(b, flag)
+        else:
+            print('No NXT bricks found')
+            
+if __name__ == '__main__':
+    main()
