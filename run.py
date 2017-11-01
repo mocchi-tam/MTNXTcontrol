@@ -14,7 +14,7 @@ class NXTControl():
         if flag:
             m_right.turn(-10, 720)
         else:
-            m_right.turn(30, 720)
+            m_right.turn(60, 720)
     
     def do(self):
         b = nxtl.find_one_brick(debug=True,strict=True,
