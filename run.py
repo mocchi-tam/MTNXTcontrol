@@ -9,9 +9,9 @@ def main():
     nc.do()
 
 class NXTControl():
-    def spin_around(self, b, flag):
+    def spin_around(self, b, anomaly):
         m_right = nxtm.Motor(b, nxtm.PORT_C)
-        if flag:
+        if anomaly:
             #m_right.turn(10, 360)
             milsec = random.uniform(3.0,5.0)
             time.sleep(milsec)
@@ -29,14 +29,14 @@ class NXTControl():
             while(True):
                 elapsed_time = time.time() - start
                 if elapsed_time < time_bomb:
-                    flag = True
+                    anomaly = False
                 else:
-                    flag = False
+                    anomaly = True
                     start = time.time()
                     time_bomb = random.randint(25,35)
                     
                 # execute the action
-                self.spin_around(b, flag)
+                self.spin_around(b, anomaly)
         else:
             print('No NXT bricks found')
             
