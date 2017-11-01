@@ -12,9 +12,9 @@ class NXTControl():
     def spin_around(self, b, flag):
         m_right = nxtm.Motor(b, nxtm.PORT_C)
         if flag:
-            m_right.turn(10, 360)
+            m_right.turn(-10, 720)
         else:
-            m_right.turn(-127, 720)
+            m_right.turn(30, 720)
     
     def do(self):
         b = nxtl.find_one_brick(debug=True,strict=True,
